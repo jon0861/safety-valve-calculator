@@ -1,6 +1,6 @@
 ﻿/* ---------------------------------------------------
-   ui.js – Version 2.0
-   Navigation, Dark-Mode, Darstellung
+   ui.js – Version 2.0.1
+   Navigation, Dark-Mode, Berechnung, History
 --------------------------------------------------- */
 
 /* ---------------------------------------
@@ -56,8 +56,25 @@ function displayResult(result) {
 
   box.innerHTML = html;
 
-  // Letztes Ergebnis global speichern (für PDF/JSON)
+  // Session-Speicher (sofort verfügbar)
   window.lastCalc = result;
+
+  // Persistenter Speicher (Seitenübergreifend)
+  localStorage.setItem("lastCalc", JSON.stringify(result));
+}
+
+/* ---------------------------------------
+   HISTORY SPEICHERN
+---------------------------------------- */
+function saveHistory(result) {
+  const history = JSON.parse(localStorage.getItem("calcHistory") || "[]");
+
+  history.push({
+    ...result,
+    timestamp: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("calcHistory", JSON.stringify(history));
 }
 
 /* ---------------------------------------
@@ -76,17 +93,19 @@ function runCalculation() {
   }
 
   const result = window.computeSafetyValve(norm, p, T, Q, medium);
+
   displayResult(result);
+  saveHistory(result);
 }
 
 /* ---------------------------------------
-   INITIALISIERUNG BEIM SEITENSTART
+   INITIALISIERUNG
 ---------------------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   initDarkMode();
   setActiveNav();
 
-  // Dark mode button injection (optional)
+  // Dark Mode Button
   const nav = document.querySelector(".navbar");
   if (nav) {
     const btn = document.createElement("button");
@@ -96,9 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     nav.appendChild(btn);
   }
 
-  // connect calculation button
+  // Berechnen-Button
   const calcBtn = document.querySelector(".calc-button");
-  if (calcBtn) {
-    calcBtn.addEventListener("click", runCalculation);
-  }
+  if (calcBtn) calcBtn.addEventListener("click", runCalculation);
 });

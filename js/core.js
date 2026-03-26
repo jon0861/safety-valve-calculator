@@ -1,11 +1,8 @@
 ﻿/* ---------------------------------------------------
-   core.js – Version 2.0
-   Physikalische Berechnung + API‑526 Auswahl
+   core.js – Physikalische Berechnung + API‑526 Auswahl
 --------------------------------------------------- */
 
-/* -------------------------
-   API‑526 ORIFICE DATEN
-------------------------- */
+/* --- API‑526 Tabelle --- */
 const API_ORIFICES = [
   { size: "D", area: 0.110 },
   { size: "E", area: 0.196 },
@@ -18,82 +15,59 @@ const API_ORIFICES = [
   { size: "M", area: 3.600 }
 ];
 
-/* ---------------------------------------------------
-   1) GASBERECHNUNG
-   Isentrop, kritisch / unterkritisch
---------------------------------------------------- */
+/* --- Gase (isentrope Näherung) --- */
 function calcGas(p_bar, T_C, Q, k = 1.4, Z = 1.0) {
-  const p = p_bar * 1e5;    // bar → Pa
-  const T = T_C + 273.15;   // °C → K
-  const R = 287;            // J/(kg*K) Luftähnlich
+  const p = p_bar * 1e5;
+  const T = T_C + 273.15;
+  const R = 287;
 
-  // kritischer Druckverhältnisfaktor
   const critical = Math.pow((2 / (k + 1)), (k / (k - 1)));
 
-  // kritische Strömung
   const Acrit = Q * Math.sqrt(R * T * k) /
     (p * Math.sqrt(critical) * Z);
 
-  return Acrit * 0.00155;   // m² → in² (Engineering-Orifice)
+  return Acrit * 0.00155; // m² → in²
 }
 
-/* ---------------------------------------------------
-   2) DAMPFBERECHNUNG
-   vereinfachtes Ausflussmodell (sicherheitsventil-like)
---------------------------------------------------- */
+/* --- Dampf (vereinfachte Näherung) --- */
 function calcSteam(p_bar, T_C, Q) {
   const p = p_bar;
-  // einfache Näherung: A = Q / (C * p)
-  const C = 22; // empirisch, nicht normgebunden
+  const C = 22; 
   return Q / (C * p);
 }
 
-/* ---------------------------------------------------
-   3) FLÜSSIGKEIT – Bernoulli
---------------------------------------------------- */
+/* --- Flüssigkeit (Bernoulli) --- */
 function calcLiquid(p_bar, rho = 1000, Q_m3h) {
-  const p = p_bar * 1e5;        // bar → Pa
-  const Q = Q_m3h / 3600;       // m³/h → m³/s
-  const Cd = 0.62;              // Discharge coefficient
+  const p = p_bar * 1e5;
+  const Q = Q_m3h / 3600;
+  const Cd = 0.62;
 
   const A = Q / (Cd * Math.sqrt(2 * p / rho));
-  return A * 1550;              // m² → in²
+  return A * 1550; // m² → in²
 }
 
-/* ---------------------------------------------------
-   4) API‑526 ORIFICE–AUSWAHL
---------------------------------------------------- */
+/* --- API‑526 Auswahl --- */
 function pickOrifice(A_in2) {
   return API_ORIFICES.find(o => o.area >= A_in2) || null;
 }
 
-/* ---------------------------------------------------
-   5) HAUPTFUNKTION
---------------------------------------------------- */
+/* --- Hauptfunktion --- */
 function compute(norm, p, T, Q, medium) {
 
   let A = 0;
 
-  if (medium === "gas") {
-    A = calcGas(p, T, Q);
-  }
-  else if (medium === "steam") {
-    A = calcSteam(p, T, Q);
-  }
-  else if (medium === "liquid") {
-    A = calcLiquid(p, 1000, Q);
-  }
+  if (medium === "gas") A = calcGas(p, T, Q);
+  else if (medium === "steam") A = calcSteam(p, T, Q);
+  else if (medium === "liquid") A = calcLiquid(p, 1000, Q);
 
   const orifice = pickOrifice(A);
 
   return {
-    norm,
-    p, T, Q, medium,
+    norm, p, T, Q, medium,
     area_in2: A,
     orifice: orifice ? orifice.size : "-",
     orificeArea: orifice ? orifice.area : null
   };
 }
 
-// globale Verbindung
 window.computeSafetyValve = compute;

@@ -1,11 +1,11 @@
 ﻿/* -----------------------------------------------------
-   SAFETY VALVE CALCULATOR - VERSION 2.0
-   Engineering UI – Blue/White + Dark Mode
+   SAFETY VALVE CALCULATOR - VERSION 2.0.1 (FINAL)
+   Engineering UI – Dark/Light Mode – Fully Responsive
 ------------------------------------------------------ */
 
-/* ------------------------------
-   RESET & GLOBAL
------------------------------- */
+/* ==============================
+   BASE RESET & GLOBAL SETTINGS
+============================== */
 * {
   margin: 0;
   padding: 0;
@@ -19,28 +19,29 @@ body {
   transition: 0.3s ease;
 }
 
-/* ------------------------------
-   COLOR VARIABLES (LIGHT MODE)
------------------------------- */
+/* ==============================
+   LIGHT MODE COLORS
+============================== */
 :root {
-  --bg: #f4f7fb;
+  --bg: #f5f8ff;
   --card-bg: #ffffff;
   --text: #1a1a1a;
   --nav-bg: #003366;
   --nav-text: #ffffff;
   --nav-active: #66a3ff;
   --btn-bg: #0055aa;
-  --btn-bg-hover: #004080;
-  --btn-secondary: #666666;
+  --btn-bg-hover: #003f7f;
+  --btn-secondary: #666;
   --table-header: #003366;
+  --border: #cccccc;
 }
 
-/* ------------------------------
-   DARK MODE VARIABLES
------------------------------- */
+/* ==============================
+   DARK MODE COLORS
+============================== */
 .dark-mode {
-  --bg: #1c1f26;
-  --card-bg: #2b303a;
+  --bg: #1b1e24;
+  --card-bg: #2a2f39;
   --text: #e6e6e6;
   --nav-bg: #0d1b2a;
   --nav-text: #ffffff;
@@ -48,12 +49,12 @@ body {
   --btn-bg: #1b263b;
   --btn-bg-hover: #415a77;
   --btn-secondary: #777;
-  --table-header: #1b263b;
+  --border: #555;
 }
 
-/* ------------------------------
-   NAVIGATION BAR
------------------------------- */
+/* ==============================
+   NAVBAR
+============================== */
 .navbar {
   background: var(--nav-bg);
   color: var(--nav-text);
@@ -82,47 +83,42 @@ body {
   text-decoration: none;
   font-weight: bold;
   padding-bottom: 4px;
-  transition: 0.2s;
+  transition: .2s;
 }
 
-.nav-links a:hover {
-  border-bottom: 3px solid var(--nav-active);
-}
-
+.nav-links a:hover,
 .nav-links a.active {
   border-bottom: 3px solid var(--nav-active);
 }
 
-/* ------------------------------
-   DARK-MODE BUTTON
------------------------------- */
+/* Dark mode toggle button */
 .dark-toggle {
   cursor: pointer;
   padding: 8px 14px;
   border-radius: 6px;
   background: var(--btn-bg);
   color: white;
-  font-size: 14px;
+  border: none;
   margin-left: 20px;
-  transition: 0.2s;
+  transition: .2s;
 }
 
 .dark-toggle:hover {
   background: var(--btn-bg-hover);
 }
 
-/* ------------------------------
+/* ==============================
    CONTENT AREA
------------------------------- */
+============================== */
 .content {
   max-width: 900px;
   margin: 40px auto;
   padding: 20px;
 }
 
-/* ------------------------------
+/* ==============================
    CARDS
------------------------------- */
+============================== */
 .form-card,
 .info-card,
 .table-card,
@@ -133,23 +129,23 @@ body {
   padding: 25px;
   border-radius: 10px;
   margin-bottom: 35px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-  transition: 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: 0.2s;
 }
 
 .form-card:hover,
 .info-card:hover,
-.contact-card:hover,
-.table-card:hover {
+.table-card:hover,
+.contact-card:hover {
   transform: translateY(-3px);
 }
 
-/* ------------------------------
-   INPUTS + BUTTONS
------------------------------- */
+/* ==============================
+   INPUTS & BUTTONS
+============================== */
 label {
-  font-weight: bold;
   display: block;
+  font-weight: bold;
   margin-bottom: 6px;
 }
 
@@ -157,11 +153,11 @@ input, select {
   width: 100%;
   padding: 12px;
   margin-bottom: 18px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 15px;
+  border: 1px solid var(--border);
   background: var(--card-bg);
   color: var(--text);
+  border-radius: 6px;
+  font-size: 15px;
 }
 
 button {
@@ -171,9 +167,8 @@ button {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 17px;
-  margin-top: 10px;
-  transition: 0.2s;
+  font-size: 16px;
+  transition: .2s;
 }
 
 button:hover {
@@ -184,54 +179,75 @@ button.secondary {
   background: var(--btn-secondary);
 }
 
-/* ------------------------------
-   TABLE STYLE
------------------------------- */
+button.secondary:hover {
+  background: var(--text);
+}
+
+/* ==============================
+   TABLES (API-526 + History)
+============================== */
 table {
   width: 100%;
   border-collapse: collapse;
   background: var(--card-bg);
 }
 
-table th {
+th {
   background: var(--table-header);
   color: white;
-  padding: 12px;
-}
-
-table td {
   padding: 10px;
-  border-bottom: 1px solid #ccc;
 }
 
-table tr:hover {
+td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+tr:hover {
   background: rgba(0,0,0,0.05);
 }
 
-/* ------------------------------
-   FOOTER
------------------------------- */
-footer {
-  margin-top: 40px;
-  background: var(--nav-bg);
-  color: white;
+/* Checkbox column */
+td:first-child {
   text-align: center;
-  padding: 20px;
-  font-size: 14px;
 }
 
-/* ------------------------------
+/* ==============================
+   FOOTER
+============================== */
+footer {
+  background: var(--nav-bg);
+  padding: 20px;
+  text-align: center;
+  color: white;
+  margin-top: 40px;
+}
+
+/* ==============================
    RESPONSIVE DESIGN
------------------------------- */
+============================== */
 @media (max-width: 700px) {
-  .nav-links {
-    flex-direction: column;
-    gap: 10px;
-    text-align: right;
-  }
 
   .navbar {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    text-align: right;
+  }
+
+  .form-card button,
+  .download-card button {
+    width: 100%;
+  }
+
+  .dark-toggle {
+    margin-left: 0;
+  }
+
+  table {
+    font-size: 14px;
   }
 }

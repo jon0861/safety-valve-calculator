@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Safety Valve Calculator – Home</title>
+  <title>Berechnungsverlauf</title>
 
-	<!-- CSS -->
+ <!-- CSS -->
 	<link rel="stylesheet" href="css/style.css">
 
 	<!-- JavaScript -->
 	<script src="js/core.js"></script>
 	<script src="js/ui.js"></script>
+	<script src="js/pdf.js"></script>
 	<script src="js/export.js"></script>
-
+	<script src="js/history.js"></script>
 </head>
 
 <body>
@@ -20,38 +21,44 @@
 <header>
   <nav class="navbar">
     <div class="logo">
-      <img src="[IMG: img/logo.svg]" alt="Logo" />
-      <span style="margin-left:10px;">Safety Valve Calculator</span>
+      img/logo.svg
+      Safety Valve Calculator
     </div>
 
     <ul class="nav-links">
-      <li>[A: index.html|Home]</li>
-      <li>[A: berechnung.html|Berechnung]</li>
-      <li>[A: normen.html|Normen]</li>
-      <li>[A: api526.html|API‑526]</li>
-      <li>[A: download.html|Download]</li>
-      <li>[A: history.html|Verlauf]</li>
-      <li>[A: kontakt.html|Kontakt]</li>
+      <li><a href="index.html">Home</a></li
+	  <li><a href="berechnung.html">Berechnung</a></li
+	  <li><a href="normen.html">Normen</a></li
+	  <li><a href="api526.html">API‑526</a></li
+	  <li><a href="download.html">Download</a></li
+	  <li><a href="History.html">History</a></li
+	  <li><a href="kontakt.html">Kontakt</a></li
     </ul>
   </nav>
 </header>
 
 <section class="content">
+
   <h1>Berechnungsverlauf</h1>
-  <p>Hier finden Sie alle gespeicherten Berechnungen.</p>
+  <p>Hier sehen Sie alle gespeicherten Berechnungen.</p>
+
+  <button onclick="deleteAllHistory()" class="secondary">Alle löschen</button>
+  <button onclick="exportSelected()" class="download-btn">Markierte exportieren</button>
 
   <div class="table-card">
     <table id="history-table">
       <thead>
         <tr>
-          <th>Zeitpunkt</th>
+          <th>✓</th>
+          <th>Zeit</th>
           <th>Norm</th>
-          <th>Druck (bar)</th>
-          <th>Temp (°C)</th>
+          <th>Druck</th>
+          <th>Temp</th>
           <th>Durchsatz</th>
           <th>Medium</th>
-          <th>Fläche (in²)</th>
+          <th>Fläche</th>
           <th>Orifice</th>
+          <th>Aktionen</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -66,7 +73,3 @@
 
 </body>
 </html>
-
-
-
-

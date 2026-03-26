@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Download – Safety Valve Calculator</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+
+<body>
+<header>
+  <nav class="navbar">
+    <div class="logo">Safety Valve Calculator</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="berechnung.html">Berechnung</a></li>
+      <li><a href="normen.html">Normen</a></li>
+      <li><a href="api526.html">API‑526</a></li>
+      <li><a href="download.html" class="active">Download</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="content">
+  <h1>Downloadbereich</h1>
+  <p>Hier können Sie die Ergebnisse Ihrer Berechnung herunterladen.</p>
+
+  <div class="download-card">
+    <button onclick="downloadPDF()" class="download-btn">PDF herunterladen</button>
+    <button onclick="downloadJSON()" class="download-btn secondary">JSON herunterladen</button>
+  </div>
+
+  <p>Die PDF enthält:</p>
+  <ul>
+    <li>Alle Eingabedaten (Druck, Temperatur, Medium)</li>
+    <li>Berechnete Fläche A</li>
+    <li>API‑526 Orifice‑Auswahl</li>
+    <li>Datum und Zeit der Berechnung</li>
+  </ul>
+</section>
+
+<footer>
+  <p>© 2026 – Ioannis Thanos – Safety Valve Engineering Tools</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+﻿/* --- GENERAL --- */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #333;
+}
+
+h1, h2, h3 {
+  color: #003366;
+}
+
+/* --- NAVIGATION --- */
+.navbar {
+  background: #003366;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a.active {
+  border-bottom: 3px solid #66a3ff;
+}
+
+/* --- CONTENT --- */
+.content {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* --- CARDS --- */
+.form-card, .info-card, .table-card, .download-card, .contact-card {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+button {
+  background: #0055aa;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background: #003f7f;
+}
+
+button.secondary {
+  background: #666;
+}
+
+button.secondary:hover {
+  background: #444;
+}
+
+/* --- TABLE --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th {
+  background: #003366;
+  color: white;
+  padding: 10px;
+}
+
+table td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* --- FOOTER --- */
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  background: #003366;
+  color: white;
+}

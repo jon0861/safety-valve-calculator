@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Berechnung von Sicherheitsventilen</title>
+<style>
+    body { font-family: Arial; margin: 30px; }
+    h2 { color: #003366; }
+    label { display: block; margin-top: 10px; }
+    input, select { padding: 5px; width: 250px; }
+    button { margin-top: 20px; padding: 10px 20px; cursor: pointer; }
+    .result { margin-top: 25px; padding: 15px; background: #eef; }
+</style>
+</head>
+<body>
+
+<h2>Berechnung von Sicherheitsventilen</h2>
+
+<label>Norm auswählen:</label>
+<select id="norm">
+    <option value="ad2000">AD 2000</option>
+    <option value="iso4126">DIN EN ISO 4126</option>
+    <option value="asme">ASME VIII</option>
+    <option value="api526">API 526 (Ventilauswahl)</option>
+</select>
+
+<label>Überdruck p (bar abs):</label>
+<input type="number" id="pressure" step="0.01">
+
+<label>Temperatur T (°C):</label>
+<input type="number" id="temperature" step="0.1">
+
+<label>Massendurchsatz / Q (kg/h oder Nm³/h):</label>
+<input type="number" id="flow" step="0.1">
+
+<label>Medium:</label>
+<select id="medium">
+    <option value="gas">Gas</option>
+    <option value="steam">Dampf</option>
+    <option value="liquid">Flüssigkeit</option>
+</select>
+
+<button onclick="calculate()">Berechnen</button>
+
+<div id="output" class="result"></div>
+
+<script>
+function calculate() {
+    const norm = document.getElementById("norm").value;
+    const p = parseFloat(document.getElementById("pressure").value);
+    const T = parseFloat(document.getElementById("temperature").value);
+    const Q = parseFloat(document.getElementById("flow").value);
+    const medium = document.getElementById("medium").value;
+
+    let A = 0;
+    let text = "";
+
+    // --------------------------------------------
+    // HINWEIS:
+    // Die tatsächlichen Formeln müssen aus den lizenzierten Normen eingesetzt werden!
+    // --------------------------------------------
+
+    if (norm === "ad2000") {
+        // Platzhalter-Formel
+        A = Q / (p * 10); 
+        text = "AD 2000 – Beispielhafte Berechnung (Platzhalter)";
+    }
+
+    if (norm === "iso4126") {
+        // Platzhalter-Formel
+        A = Q / (p * 12); 
+        text = "DIN EN ISO 4126 – Beispielhafte Berechnung (Platzhalter)";
+    }
+
+    if (norm === "asme") {
+        // Platzhalter-Formel
+        A = Q / (p * 15); 
+        text = "ASME VIII – Beispielhafte Berechnung (Platzhalter)";
+    }
+
+    if (norm === "api526") {
+        // Beispielhafte Auswahl eines API‑526‑Ventils auf Basis A
+        const apiValves = [
+            { size: "D", area: 0.110 },
+            { size: "E", area: 0.196 },
+            { size: "F", area: 0.307 },
+            { size: "G", area: 0.503 }
+        ];
+
+        // Platzhalter-Berechnung der Fläche
+        A = Q / (p * 20);
+
+        let selected = apiValves.find(v => v.area >= A);
+
+        text = "API 526 – Ventilauswahl (Platzhalter):<br>";
+        if (selected)
+            text += "Empfohlene API Größe: <b>" + selected.size + "</b>";
+        else
+            text += "Kein passendes API‑526‑Ventil gefunden.";
+    }
+
+    document.getElementById("output").innerHTML =
+        text + "<br><br>Erforderliche Fläche A (Platzhalter): <b>" + A.toFixed(4) + " in²</b>";
+}
+</script>
+
+</body>
+</html>

@@ -1,29 +1,47 @@
 ﻿<!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>API‑526 – Safety Valve Calculator</title>
-<link rel="stylesheet" href="style.css" />
+
+<!-- CSS -->
+css/style.css
+
+<!-- JS -->
+js/core.js</script>
+js/ui.js</script>
+js/export.js</script>
 </head>
 
 <body>
+
 <header>
   <nav class="navbar">
-    <div class="logo">Safety Valve Calculator</div>
+    <div class="logo">
+      img/logo.svg
+      <span style="margin-left:10px;">Safety Valve Calculator</span>
+    </div>
+
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="berechnung.html">Berechnung</a></li>
-      <li><a href="normen.html">Normen</a></li>
-      <li><a href="api526.html" class="active">API‑526</a></li>
-      <li><a href="download.html">Download</a></li>
-      <li><a href="kontakt.html">Kontakt</a></li>
+      <li>index.htmlHome</a></li>
+      <li>berechnung.htmlBerechnung</a></li>
+      <li>normen.htmlNormen</a></li>
+      <li>api526.htmlAPI‑526</a></li>
+      <li>download.htmlDownload</a></li>
+      <li>kontakt.htmlKontakt</a></li>
     </ul>
   </nav>
 </header>
 
 <section class="content">
-  <h1>API‑526 Orifice Tabelle</h1>
-  <p>Standardisierte Orifice-Größen und Durchflussflächen nach API‑526.</p>
+
+  <h1>API‑526 Orifice‑Größen</h1>
+  <p>
+    API‑526 definiert standardisierte Orifice‑Größen für Sicherheitsventile.
+    Diese Tabelle enthält alle gängigen Größen (D bis M) mit ihren 
+    effektiven Durchflussflächen.
+  </p>
 
   <div class="table-card">
     <table>
@@ -45,6 +63,16 @@
         <tr><td>M</td><td>3.600</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="info-card">
+    <h2>Hinweis zur Verwendung</h2>
+    <p>
+      Die API‑526‑Orifice‑Auswahl erfolgt erst, nachdem die erforderliche 
+      Fläche berechnet wurde. 
+      Die kleinste Fläche, die größer oder gleich der erforderlichen 
+      Fläche ist, ist der passende Orifice‑Code.
+    </p>
   </div>
 
 </section>

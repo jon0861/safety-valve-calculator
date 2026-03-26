@@ -1,59 +1,90 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Normen – Safety Valve Calculator</title>
-<link rel="stylesheet" href="style.css">
+
+<!-- CSS -->
+css/style.css
+
+<!-- JS -->
+js/core.js</script>
+js/ui.js</script>
+js/export.js</script>
 </head>
 
 <body>
+
 <header>
   <nav class="navbar">
-    <div class="logo">Safety Valve Calculator</div>
+    <div class="logo">
+      img/logo.svg
+      <span style="margin-left:10px;">Safety Valve Calculator</span>
+    </div>
+
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="berechnung.html">Berechnung</a></li>
-      <li><a href="normen.html" class="active">Normen</a></li>
-      <li><a href="api526.html">API‑526</a></li>
-      <li><a href="download.html">Download</a></li>
-      <li><a href="kontakt.html">Kontakt</a></li>
+      <li>index.htmlHome</a></li>
+      <li>berechnung.htmlBerechnung</a></li>
+      <li>normen.htmlNormen</a></li>
+      <li>api526.htmlAPI‑526</a></li>
+      <li>download.htmlDownload</a></li>
+      <li>kontakt.htmlKontakt</a></li>
     </ul>
   </nav>
 </header>
 
 <section class="content">
-  <h1>Normenübersicht</h1>
-  <p>Allgemein beschreibende Zusammenfassung der wichtigsten Regelwerke ohne geschützte Inhalte.</p>
 
+  <h1>Normenübersicht</h1>
+  <p>Eine allgemein gehaltene, rechtssichere Zusammenfassung der wichtigsten Regelwerke für Sicherheitsventile.<br>
+  <b>Alle Inhalte sind neutral formuliert und enthalten keine geschützten Formeln.</b></p>
+
+  <!-- AD 2000 -->
   <div class="info-card">
     <h2>AD 2000</h2>
     <p>
-      Das AD‑Regelwerk verwendet Druck-, Temperatur- und Strömungsansätze zur Bestimmung der erforderlichen Ventilfläche.
-      Kritische und unterkritische Strömung werden unterschieden und es kommen Korrekturfaktoren zum Einsatz.
+      Das deutsche AD‑Regelwerk beschreibt die Auslegung von Sicherheitsventilen anhand 
+      von Druck‑, Temperatur‑ und Strömungsgrößen. 
+      Es unterscheidet zwischen kritischer und unterkritischer Strömung und verwendet 
+      volumenstrombezogene Korrekturfaktoren zur Dimensionierung der Ventilquerschnittsfläche.
     </p>
   </div>
 
+  <!-- ISO 4126 -->
   <div class="info-card">
     <h2>DIN EN ISO 4126</h2>
     <p>
-      Die ISO‑Norm liefert international harmonisierte Gleichungen für Gase, Dämpfe und Flüssigkeiten.
-      Sie berücksichtigt Realgasfaktoren, Temperaturabhängigkeiten und detaillierte Strömungsmodelle.
+      ISO 4126 ist ein internationales, harmonisiertes Normenset für Sicherheitsventile.
+      Es beschreibt Grundlagen für gas-, dampf- und flüssigkeitsförmige Medien und bezieht 
+      thermodynamische Stoffgrößen wie den Adiabatenexponenten, Realgasfaktoren und 
+      Temperaturabhängigkeiten ein. 
+      Die Norm liefert detaillierte Rahmenbedingungen für die Berechnung, jedoch ohne 
+      konkrete Produktabmessungen.
     </p>
   </div>
 
+  <!-- ASME VIII -->
   <div class="info-card">
     <h2>ASME VIII</h2>
     <p>
-      ASME stellt zertifizierte Durchflusskoeffizienten bereit und nutzt standardisierte Annahmen für kritische Gas- und Dampfströmung.
-      Viele Werte basieren auf realen Prüfstandsergebnissen.
+      ASME VIII (USA) enthält Regeln zur Druckbehälterauslegung und beschreibt Prüf- und 
+      Zertifizierungsbedingungen für Sicherheitsventile. 
+      Es werden standardisierte Durchflusskoeffizienten und Annahmen zur kritischen 
+      Gas‑ bzw. Dampfströmung verwendet. 
+      Viele Werte resultieren aus Prüfstandszertifizierungen.
     </p>
   </div>
 
+  <!-- API 526 -->
   <div class="info-card">
     <h2>API 526</h2>
     <p>
-      API‑526 ist eine tabellarische Norm, die standardisierte Orifice‑Größen, zugehörige Flächen und Anschlussabmessungen definiert.
-      Es enthält selbst keine Berechnungsformeln, sondern liefert Auswahlgrößen.
+      API‑526 definiert standardisierte Orifice‑Größen (D bis M) einschließlich 
+      Gehäusebauformen und Anschlussmaße. 
+      Die Norm enthält selbst keine Berechnungsformeln, sondern dient der schnellen 
+      Auswahl eines standardisierten Sicherheitsventils, nachdem die erforderliche 
+      Querschnittsfläche ermittelt wurde.
     </p>
   </div>
 

@@ -1,16 +1,9 @@
-﻿/* ---------------------------------------------------
-   ui.js – Version 2.0.1
-   Navigation, Dark-Mode, Berechnung, History
---------------------------------------------------- */
-
-/* ---------------------------------------
-   DARK MODE: speichern + laden
+﻿/* ---------------------------------------
+   DARK MODE
 ---------------------------------------- */
 function initDarkMode() {
   const saved = localStorage.getItem("darkmode");
-  if (saved === "true") {
-    document.body.classList.add("dark-mode");
-  }
+  if (saved === "true") document.body.classList.add("dark-mode");
 }
 
 function toggleDarkMode() {
@@ -22,63 +15,48 @@ function toggleDarkMode() {
 }
 
 /* ---------------------------------------
-   NAVIGATION ACTIVE-HIGHLIGHT
+   ACTIVE NAVIGATION
 ---------------------------------------- */
 function setActiveNav() {
   const path = window.location.pathname.split("/").pop();
-
   document.querySelectorAll(".nav-links a").forEach(a => {
-    const href = a.getAttribute("href");
-    if (href === path) {
-      a.classList.add("active");
-    }
+    if (a.getAttribute("href") === path) a.classList.add("active");
   });
 }
 
 /* ---------------------------------------
-   FORMULAR: ERGEBNIS ANZEIGEN
+   ERGEBNIS ANZEIGEN
 ---------------------------------------- */
 function displayResult(result) {
   const box = document.getElementById("result");
   if (!box) return;
 
-  let html = `
-      <h3>Berechnungsergebnis</h3>
-      <p><b>Norm:</b> ${result.norm}</p>
-      <p><b>Druck:</b> ${result.p} bar</p>
-      <p><b>Temperatur:</b> ${result.T} °C</p>
-      <p><b>Durchsatz:</b> ${result.Q}</p>
-      <p><b>Medium:</b> ${result.medium}</p>
-      <hr>
-      <p><b>Benötigte Fläche:</b> ${result.area_in2.toFixed(4)} in²</p>
-      <p><b>Orifice:</b> ${result.orifice}</p>
+  box.innerHTML = `
+    <h3>Berechnungsergebnis</h3>
+    <p><b>Norm:</b> ${result.norm}</p>
+    <p><b>Druck:</b> ${result.p} bar</p>
+    <p><b>Temperatur:</b> ${result.T} °C</p>
+    <p><b>Durchsatz:</b> ${result.Q}</p>
+    <p><b>Medium:</b> ${result.medium}</p>
+    <hr>
+    <p><b>Benötigte Fläche:</b> ${result.area_in2.toFixed(4)} in²</p>
+    <p><b>Orifice:</b> ${result.orifice}</p>
   `;
 
-  box.innerHTML = html;
-
-  // Session-Speicher (sofort verfügbar)
+  // LIVE-SPEICHER
   window.lastCalc = result;
 
-  // Persistenter Speicher (Seitenübergreifend)
+  // PERMANENTER SPEICHER
   localStorage.setItem("lastCalc", JSON.stringify(result));
-}
 
-/* ---------------------------------------
-   HISTORY SPEICHERN
----------------------------------------- */
-function saveHistory(result) {
+  // HISTORY
   const history = JSON.parse(localStorage.getItem("calcHistory") || "[]");
-
-  history.push({
-    ...result,
-    timestamp: new Date().toLocaleString()
-  });
-
+  history.push({ ...result, timestamp: new Date().toLocaleString() });
   localStorage.setItem("calcHistory", JSON.stringify(history));
 }
 
 /* ---------------------------------------
-   FORMULAR: BERECHNUNG AUSLÖSEN
+   BERECHNUNG STARTEN
 ---------------------------------------- */
 function runCalculation() {
   const norm = document.getElementById("norm").value;
@@ -93,9 +71,22 @@ function runCalculation() {
   }
 
   const result = window.computeSafetyValve(norm, p, T, Q, medium);
-
   displayResult(result);
-  saveHistory(result);
+}
+
+/* ---------------------------------------
+   WIEDERHERSTELLEN BEIM SEITENSTART
+---------------------------------------- */
+function restoreCalculation() {
+  const saved = localStorage.getItem("lastCalc");
+  if (!saved) return;
+
+  const result = JSON.parse(saved);
+  window.lastCalc = result;
+
+  // Wenn Ergebnisbox vorhanden → anzeigen
+  const box = document.getElementById("result");
+  if (box) displayResult(result);
 }
 
 /* ---------------------------------------
@@ -104,8 +95,8 @@ function runCalculation() {
 document.addEventListener("DOMContentLoaded", () => {
   initDarkMode();
   setActiveNav();
+  restoreCalculation();
 
-  // Dark Mode Button
   const nav = document.querySelector(".navbar");
   if (nav) {
     const btn = document.createElement("button");
@@ -115,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
     nav.appendChild(btn);
   }
 
-  // Berechnen-Button
   const calcBtn = document.querySelector(".calc-button");
   if (calcBtn) calcBtn.addEventListener("click", runCalculation);
 });
